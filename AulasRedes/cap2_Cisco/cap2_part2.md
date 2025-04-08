@@ -1,4 +1,4 @@
-# Anotações baseadas no modulo 2 do curso da cisco (2.0 - 2.3)
+# Anotações baseadas no modulo 2 do curso da cisco 
 
 # Configurações básicas de Dispositivo
 
@@ -102,7 +102,7 @@ E em casos que configurações indesejadas foram salvas no startup-config, pode 
 
 ## Endereços IP
 
-Endereços de IP são o principal meio de permitir que os dispositivos se localizem e estabeleçam uma comunicação ponto a ponto na internet. _Todo dispositivo final de uma rede deve ter um endereço IP.
+Endereços de IP são o principal meio de permitir que os dispositivos se localizem e estabeleçam uma comunicação ponto a ponto na internet. _Todo dispositivo final de uma rede deve ter um endereço IP_.
 
 ### Estrutura do endereço IPv4
 
@@ -112,6 +112,96 @@ Nesse tipo de endereço uma mascára de sub-rede é necessária. Essa mascára d
 Juntando isso com o IPv4, a máscara de sub-rede determina qual sub-rede o dispositivo é membro.
 O endereço de gateway padrão é o endereço IP do roteador que o host usará para acessar redes remotas, incluindo a Internet.
 
+## Mascaras de Sub-rede
+
+A finalidade de uma máscara de sub-rede é separar a parte de rede do endereço da parte do host do endereço IP. A parte da rede do endereço IP é identificada por todos os 1s binários na máscara de sub-rede. 
+
+### Como calcular máscaras de Sub-rede
+
+Cada três dígitos na máscara, correspondem a uma parte do endereço IP do host. Essas partes são formadas por oito bits, por isso recebem o nome de octetos.
+
 ### O IPv6
 
-Esses endereços têm 128 bits
+Esses endereços têm 128 bits e são escritos numa sequencia de valores hexadecimais, cada 4 bits é representado por um dígito hexadecimal. Tendo um valor total de 32 valores hexadecimais. Grupos de 4 dígitos hexadecimais **são separados por ":"**. 
+
+## Interfaces e Portas
+
+Comunicações de rede **dependem** de _interfaces do dispositivo do usuário final, interfaces do dispositivo de rede e cabos_.
+As interfaces físicas tem especificações que as definem. Os cabos que estão conectados á interface são projetados de acordo com os padrões físicos da interface.
+Os tipos de mídia de rede incluem:
+ * cabos de cobre de par trançado 
+ * cabos de fibra óptica 
+ * cabos coaxiais ou sem fio
+
+Cada tipo de meio físico de rede oferece características e benefício diferentes, sendo que cada mídia pode servir para propósitos diferentes.
+Algumas diferenças entre os vários tipos de mídia:
+ * A distância pela qual o meio físico consegue carregar um sinal com êxito;
+ * O ambiente no qual o meio físico deve ser instalado;
+ * A quantidade e a velocidade de dados nas quais eles devem ser transmitidos;
+ * O custo do meio físico e da instalação.
+
+Os links na internet exigem um tipo de mídia de rede específico e uma tecnologia de rede específica.
+Ethernet é a tecnologia de rede local _(LAN)_ mais comumente usada atualmente.
+
+Os switchs de duas camadas (_pelo menos os da cisco_) tem portas para conexões com dispoditivos físicos. Mas elas não são compativeis com endereços de IP da camada 3.
+Switches tem **uma ou mais** intefaces virtuais (_SVIs_). Essas interfaces existem pois não há hardware físico no dispositivo associado, SVIs são criadas no software.
+SVIs permitem o _gerenciamento remoto de um switch_ em rede _usando IPv4 ou IPv6_. Switchs tem uma SVI por padrão, essa SVI geralmente **é a interface VLAN1**
+**OBS: Switchs de camada 2 _não precisam de um endereço IP_, esse endereço é a atribuido a SVI, um switch não precisa de um IP para executar suas operações**
+
+## Configuração manual de endereços IP Para dispositivos finais
+
+Os dispositivos finais na rede precisam de um IP para poderem se comunicar com outros dispositivos em rede.
+
+Usando o **DHCP(Dynamic Host Configuration Protocol)** é possível inserir as informações IPv4 nos dispositivos finais manualmente ou automáticamente.
+
+Como configurar um Ipv4 manualmente no windows
+ 1 - Abra o **Control painel > Network sharing center > change adapter settings**
+ 2 - Escolha o Adaptador
+ 3 - clique com o botão direito do mouse
+ 4 - selecione **properties**
+ 5 - clique em **Internet Protocol versão 4 (TCP/IPv4)**
+ 6 - clique em properties 
+ 7 - Configure as informações de endereço IPv4 e máscara de sub-rede e o gateway padrão.
+
+**OBS: Os endereços do servidor DNS são os endereços IPv4 e IPv6 dos servidores DNS (Domain Name System),usados para converter endereços IP em nomes de domínio, como www.cisco.com.** 
+
+## Configuração automática de endereço IP Para dispositivos finais
+
+O _DHCP_ é a tecnologia usada em quase todas as redes.
+Mas porque o DHCP é tão usado? Simples! Pois sem ele muito trabalho extra seria necessário.
+
+Em uma rede o DHCP habilita a configuração automática do IPv4 para os dispositivos finais habilitados para o DHCP. Isso ajuda muito pois caso o contrário teriamos que configurar manualmente cada endereço IP dos dispositivos conectados a rede, tanto Hosts como sispositivos finais. Sem contar que a configuração manual aumenta a possibilidade de ocorrer o erro de duplicar o endereço de outro dispositivo.
+
+Para configurar automáticamente o endereço IP do dispositivo basta apenas seguir os mesmos passos da configuração manual, e clicar nas opções **Obtain an IP address automatically** e **Obtain DNS server address automatically**.
+Assim o computador vai buscar um servidor DHCP e rebecerá as configurações de endereço.
+
+**OBS:** IPv6 usa DHCPv6 e SLAAC (Stateless Address Autoconfiguration) para alocação de endereços dinâmicos.
+
+## Verificando a configuração de IP do PC windows
+
+Usar o comando **ipconfig** no console, nos permite exibir as configurações de IP do PC. A saída mostrará as informações de endereço IPv4, máscara de sub-rede e gateway recebidas do servidor DHCP.
+
+## Configuração da interface virtual de um Swtich
+
+Como configurar o SVI de um Switch:
+ * Use o comando **interface vlan 1** no modo global.
+ * Use o comando **ip address (insira aqui o endereço IP e a mascara de sub-rede)**
+ * Use o comando **no shutdown** para ativar a interface
+
+## Testando atribuições de Interface
+
+O comando _show ip interface brief_ nos permite examinar as interfaces do switch.
+Se uma interface estiver como "Down" qunado nós usamos o comando acima, quer dizer que aquela interface está inoperante, e se estiver "UP" quer dizer que está operante
+
+Para nós verficarmos por exemplo se um pc está conectado ao switch, seguimos os seguintes passos:
+ 1 - Conectar um _cabo de Console_ entre as duas máquinas
+ 2 - Após isso usamos o comando **show ip interface brief** no console do swtich
+ 3 - agora basta realizar as configurações necessárias de acordo com a análise das interfaces.
+
+## Testando a conectividade Ponta a Ponta
+
+É sempre bom testar as conexões ip em ambas as direções, de A pra B e B pra A, por exemplo.
+Para testarmos a conectividade e as atribuições IP entre todos os dispositivos, usaremos o comando **ping**
+ 1 - Escolha um PC da sua rede que você deseja verificar as conexões
+ 2 - Entre no Console/CLI
+ 3 - Use o Comando **ping (insira o _IP_ aqui)**
