@@ -55,3 +55,18 @@ As duas principais vantagens da Segmentação:
  * Aumenta a velocidade - Como um fluxo de dados grande é segmentado em pacotes, grandes quantidades de dados podem ser enviadas pela rede sem amarrar um link de comunicação. Isso permite que muitas conversas diferentes sejam intercaladas na rede chamada multiplexação.
  * Aumenta a eficiência -Se um único segmento não conseguir alcançar seu destino devido a uma falha na rede ou no congestionamento da rede, somente esse segmento precisa ser retransmitido em vez de reenviar todo o fluxo de dados
 
+
+
+## Função dos endereços da camada de enlace de dados - Mesma rede IP
+
+Quando o remetente e o destinatário do pacote IP estiverem na mesma rede, o quadro de enlace de dados será enviado diretamente para o dispositivo receptor.
+Na rede _ethernet_ os endereços de links de dados são conhecidas como endereços **Ethernet Media Access Control (MAC)**.
+
+Os endereços MAC são embutidos fisicamente na NIC Ethernet.
+
+ * **Endereço MAC de origem**- Este é o endereço do link de dados, ou o endereço MAC Ethernet, do dispositivo que envia o quadro de link de dados com o pacote IP encapsulado. O endereço MAC da placa de rede Ethernet do PC1 é AA-AA-AA-AA-AA-AA, escrito em notação hexadecimal.
+ * **Endereço MAC de destino** - Quando o dispositivo receptor está na mesma rede do dispositivo remetente, este é o endereço do link de dados do dispositivo receptor. Neste exemplo, o endereço MAC de destino é o endereço MAC do servidor FTP: CC-CC-CC-CC-CC-CC, escrito em notação hexadecimal.
+
+## Função dos endereços da camada de rede
+
+Quando o remetente do pacote estiver em uma rede diferente do destinatário.
