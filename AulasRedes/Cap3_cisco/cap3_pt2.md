@@ -64,5 +64,22 @@ Um endereço IP tem duas partes:
 
 **OBS: A máscara de sub-rede (IPv4) ou comprimento do prefixo (IPv6) é usada para identificar a parte da rede de um endereço IP da parte do host.**
 
-## Dispositivos na Mesma Rede
+## Função dos endereços da camada de enlace de dados - Mesma rede IP
 
+Quando remetende e destinatário estiverem na mesma rede, o quadro de enlace será enviado de forma direta para o dispositivo receptor. Na rede ethernet os endereços do link de dados são conhecidos como endereços Ethernet Media Access Control (MAC).
+OS endereços MAC são imbutidos fisicamente na NIC Ethernet:
+
+* Endereço MAC de origem - Este é o endereço do link de dados, ou o endereço MAC Ethernet, do dispositivo que envia o quadro de link de dados com o pacote IP encapsulado. O endereço MAC da placa de rede Ethernet do PC1 é AA-AA-AA-AA-AA-AA, escrito em notação hexadecimal.
+* Endereço MAC de destino - Quando o dispositivo receptor está na mesma rede do dispositivo remetente, este é o endereço do link de dados do dispositivo receptor. Neste exemplo, o endereço MAC de destino é o endereço MAC do servidor FTP: CC-CC-CC-CC-CC-CC, escrito em notação hexadecimal.
+
+## Função dos Endereços  da camada de Rede
+
+Quando o remetente do pacote estiver em uma rede diferente da do destinatário, os endereços de origem e destino representarão hosts em redes diferentes. Isso é indicado pela porção da rede do endereço IP do host destino. 
+
+## Função dos endereços da camada de enlace de dados - Redes IP diferentes
+
+Quando remetente e destinatário estão em redes diferentes, não será possível enviar o quadro de enlace de dados Ethernet de forma direta, Nesse caso o quadro Ethernet deve ser enviado a outro dispositivo como roteador ou gateway padrão. 
+* Endereço MAC de origem - O endereço MAC Ethernet do dispositivo de envio, PC1. O endereço MAC da interface Ethernet do PC1 é AA-AA-AA-AA-AA-AA.
+* Endereço MAC de destino - Quando o dispositivo receptor, o endereço IP de destino, está em uma rede diferente do dispositivo remetente, o dispositivo remetente usa o endereço MAC Ethernet do gateway ou roteador padrão. Neste exemplo, o endereço MAC de destino é o endereço MAC da interface Ethernet R1, 11-11-11-11-11-11. Esta é a interface que está conectada à mesma rede que PC1, como mostrado na figura.
+
+É importante que o endereço IP do gateway padrão seja configurado em cada host na rede local. Todos os pacotes para destino nas redes remotas são enviados para o gateway padrão. 
