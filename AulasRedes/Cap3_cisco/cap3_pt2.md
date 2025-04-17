@@ -83,3 +83,15 @@ Quando remetente e destinatário estão em redes diferentes, não será possíve
 * Endereço MAC de destino - Quando o dispositivo receptor, o endereço IP de destino, está em uma rede diferente do dispositivo remetente, o dispositivo remetente usa o endereço MAC Ethernet do gateway ou roteador padrão. Neste exemplo, o endereço MAC de destino é o endereço MAC da interface Ethernet R1, 11-11-11-11-11-11. Esta é a interface que está conectada à mesma rede que PC1, como mostrado na figura.
 
 É importante que o endereço IP do gateway padrão seja configurado em cada host na rede local. Todos os pacotes para destino nas redes remotas são enviados para o gateway padrão. 
+
+## Endereços de enlace de dados
+
+O endereço físico da camada 2 do link de dados(endereço de enlace) _tem como função_ **fornecer o quadro de enlace de dados de uma interface de rede para outra na mesma rede**.
+Antes mesmo do pacote IP ser enviado por qualquer tipo de rede com ou sem fio, ele é **encapsulado em um quadro de enlace de dados**, só assim ele é transmitido pela mídia física.
+Conforme o pacote IP viaja pela rede (entre host e host, host e roteador e etc) ele é encapsulado em um novo quadro de enlace de dados, a cada ponto que ele passa (hosts pra roteadores e tal). E cada um desses quadros contém o endereço de enlace de dados de origem da placa NIC que envia o quadro, e o endereço de enlace da placa NIC de destino que recebe o quadro.
+Na camada 2, o protocolo de enlace é usado apenas para entregar o pacote NIC para outro NIC da mesma rede. O roteadore remove as informações da camada 2 quando é recebido na NIC e adiciona novas informações de enlace antes de encaminhar a NIC de saída no seu caminho para o destino final.
+
+O pacote IP é encapsulado em um quadro de link de dados que contém as seguintes informações de link de dados:
+
+* Endereço de link de dados de origem - O endereço físico da NIC que está enviando o quadro de link de dados.
+* Endereço de link de dados de destino - O endereço físico da NIC que está recebendo o quadro de link de dados. Esse endereço é o roteador do próximo salto ou o endereço do dispositivo de destino final.
