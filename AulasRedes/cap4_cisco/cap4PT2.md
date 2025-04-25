@@ -75,4 +75,48 @@ Alguns tipos de cabo:
 Atualmente, na maioria dos ambientes empresariais, a fibra óptica é usada principalmente como cabeamento de backbone para conexões ponto a ponto de alto tráfego entre instalações de distribuição de dados.
 Ele também é usado para a interconexão de edifícios em campus multi-construção. Como os cabos de fibra ótica não conduzem eletricidade e têm uma baixa perda de sinal, eles são adequados para esses usos.
 
+**OBS: cabeamento BACKBONE = é o conjunto de cabos de alta capacidade que interliga os principais pontos de uma rede, como salas de telecomunicações, salas de equipamentos e instalações de entrada**
+
 ![Cobre vs Optica](../imagens/tblOpticaVSCobre.png)
+
+# Meios Sem Fio
+
+## Propriedades do Meio sem Fio
+
+A conexão sem fio transporta sinais eletromagnéticos que representam os dígitos binários de comunicações de dados usando frequências de rádio ou de micro-ondas.
+Esse tipo de mídia oferece as melhores opções de mobilidade entre as mídias, vale ressaltar que o número de dispositivos sem fio está em constante aumento. Atualmente a rede sem fio é a principal maneira de se conectar a redes domésticas e corporativas.
+
+Algumas limitações da rede sem fio
+
+* **Área de cobertura** - As tecnologias de comunicação de dados sem fio funcionam bem em ambientes abertos. No entanto, alguns materiais de construção utilizados em prédios e estruturas, e o terreno local, limitarão a eficácia da cobertura.
+* **Interferência** - A conexão sem fio é suscetível a interferências e pode ser interrompida por dispositivos comuns, como telefones sem fio domésticos, alguns tipos de luzes fluorescentes, fornos de microondas e outras comunicações sem fio.
+* **Segurança** - A cobertura de comunicação sem fio não requer acesso a uma parte física da mídia. Portanto, os dispositivos e usuários que não estão autorizados a acessar a rede podem obter acesso à transmissão. A segurança da rede é o principal componente da administração de uma rede sem fio.
+* **AS WLANs e os meios compartilhadosCabos de conexão de fibra** - Operam em half-duplex, o que significa que apenas um dispositivo pode enviar ou receber por vez. O meio sem fio é compartilhado com todos os usuários sem fio. Muitos usuários acessando a WLAN simultaneamente resultam em largura de banda reduzida para cada usuário.
+
+## Tipos de Meio Físico sem Fio
+
+Em cada padrão, as especificações da camada física são aplicadas a áreas que incluem o seguinte:
+
+* Codificação de dados para sinal de rádio;
+* Frequência e potência de transmissão;
+* Requisitos de recepção e decodificação de sinal;
+* Projeto e construção de antenas.
+
+Estes são os padrões sem fio:
+
+* **Wi-Fi (IEEE 802.11)** - Tecnologia de LAN sem fio (WLAN), geralmente chamada de Wi-Fi. A WLAN usa um protocolo baseado em contenção conhecido como acesso múltiplo / detecção de colisão de portadora (CSMA / CA). A NIC sem fio deve ouvir primeiro, antes de transmitir, para determinar se o canal de rádio está limpo. Se houver outro dispositivo sem fio transmitindo, a NIC deverá esperar até o canal estar limpo. Wi-Fi é uma marca comercial registrada da Wi-Fi Alliance. O Wi-Fi é usado com dispositivos WLAN certificados com base nos padrões IEEE 802.11.
+* **Bluetooth (IEEE 802.15)** - Este é um padrão de rede pessoal sem fio (WPAN), comumente conhecido como “Bluetooth”. Ele usa um processo de emparelhamento de dispositivo para se comunicar em distâncias de 1 a 100 metros.
+* **WiMAX (IEEE 802:16)** - Comumente conhecido como Interoperabilidade mundial para acesso por microondas (WiMAX), esse padrão sem fio usa uma topologia ponto a multiponto para fornecer acesso à banda larga sem fio.
+* **Zigbee (IEEE 802.15.4)** - Zigbee é uma especificação usada para comunicações de baixa taxa de dados e baixa potência. Destina-se a aplicações que exigem taxas de dados de curto alcance, baixas e longa duração da bateria. Zigbee é normalmente usado para ambientes industriais e de Internet das Coisas (IoT), como interruptores de luz sem fio e coleta de dados de dispositivos médicos.
+
+## LAN sem fio
+
+Uma implementação comum de dados sem fio permite que dispositivos se conectem sem fio por meio de uma LAN. Em geral, uma WLAN requer os seguintes dispositivos de rede:
+
+* **Ponto de acesso sem fio (AP)** - Estes concentram os sinais sem fio dos usuários e se conectam à infraestrutura de rede existente baseada em cobre, como Ethernet. Os roteadores sem fio domésticos e de pequenas empresas integram as funções de um roteador, comutador e ponto de acesso em um dispositivo.
+* **Adaptadores de NIC sem fio** - fornecem recursos de comunicação sem fio para hosts de rede.
+
+Com o seu desenvolvimento, surgiram diversos padrões baseados Ethernet WLAN. Ao comprar dispositivos sem fio, **garanta compatibilidade e interoperabilidade**.
+
+Podemos ver que alguns dos benefícios da comunicação sem fio seriam: economia nos custos de fiação local e a conveniência da mobilidade de host.
+Os administradores desse tipo de rede devem implementar medidas rigorosas para impedir acesso e danos não autorizados ás WLANs.
