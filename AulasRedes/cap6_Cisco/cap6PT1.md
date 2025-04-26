@@ -18,5 +18,3 @@ A camada de enlace de dados faz o seguinte:
 
 Nas redes de computadores um NÓ é **um dispositivo que pode receber, criar, armazenar ou encaminhar dados ao longo de um caminho de comunicação**.
 Nó pode ser tanto um dispositivo final de rede(laptops e etc) quanto um dispositivo intermerdiário(switchs e etc).
-
-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
