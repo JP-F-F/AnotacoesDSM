@@ -106,3 +106,33 @@ Aí a gente converte esses binários para hexadecimal, e busca os respectivos va
 1100 = 8+4 = 12 ----> Hex C
 0101 = 4+1 = 5  ----> Hex 5
 Ou seja 197 = 0xC5 ou só C5 pra abreviar
+
+## Convertendo decimal para hex
+
+Converter números decimais em valores hexadecimais é simples. Siga as etapas listadas:
+
+1. Converta o número decimal para strings binárias de 8 bits.
+2. Divida as cadeias binárias em grupos de quatro a partir da posição mais à direita.
+3. Converta cada quatro números binários em seu dígito hexadecimal equivalente.
+
+O exemplo fornece as etapas para converter 168 em hexadecimal.
+
+Por exemplo, 168 convertidos em hexadecimal usando o processo de três etapas.
+
+1. 168 em binário é 10101000.
+2. 10101000 em dois grupos de quatro dígitos binários é 1010 e 1000.
+3. 1010 é hexadecimal A e 1000 é hexadecimal 8.
+
+## Convertendo HEX para decimal
+
+Converter números hexadecimais em valores decimais também é simples. Siga as etapas listadas:
+
+1. Converta o número hexadecimal em cadeias binárias de 4 bits.
+2. Criar agrupamento binário de 8 bits a partir da posição mais à direita.
+3. Converta cada agrupamento binário de 8 bits em seu dígito decimal equivalente.
+
+Este exemplo fornece as etapas para converter D2 em decimal.
+
+1. D2 em cadeias binárias de 4 bits é 1101 e 0010.
+2. 1101 e 0010 é 11010010 em um agrupamento de 8 bits.
+3. 11010010 em binário é equivalente a 210 em decimal
