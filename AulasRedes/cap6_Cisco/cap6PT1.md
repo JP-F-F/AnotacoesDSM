@@ -159,3 +159,39 @@ Redes multiacesso que usam acesso controlado incluem o seguinte:
 ------------------------------------------------------------------------------------------------------
 **Observação: Atualmente, as redes Ethernet operam em full-duplex e não exigem um método de acesso.**
 
+### Acesso baseado em Contenção - CSMA / CD
+
+Exemplos de rede baseadas em acesso de contenção:
+* LAN sem fio (usa CSMA/CA)
+* LAN Ethernet de topologia de barramento legado (usa CSMA/CD)
+* LAN Ethernet herdada usando um hub (usa CSMA/CD)
+
+Essas redes operam em half-duplex, por isso é necessário um processo que determine quando um dispositivo pode
+enviar mensagens e o que ocorre caso vários dispositivos enviem simultâneamente.
+
+Caso dois dispositivos transmitam juntos ocorrera uma <big>colisão</big>. No caso de LANs ethernet herdadas, ambos
+os dispositivos percebem a colisão. Esta é a parte de detecção de colisão (CD) do CSMA/CD. 
+**Esta é a parte de detecção de colisão (CD) do CSMA/CD.**
+Nesses casos de colisão os dados enviados pelos dispositivos serão corrompidos.
+
+Caso um computador precise enviar uma mensagem, ele vê se tem algum outro dispositivo está transmitindo ou se ele
+está recebendo alguma mensagem, caso não ele assume que a rede está livre.
+
+Hub Ethernet também é conhecido como repetidor multiporta, quando o hub reenvia o quadro, e este possui um endereço
+específico, todos os outros dispositivos que não tem esse endereço ignoram o quadro enviado.
+
+### Acesso Baseado em contenção - CSMA / CA
+
+Este é o acesso múltiplo por detecção de portadora / prevenção de colisão (CSMA / CA).
+O CMSA/CA usa técnicas adicionais junto as técnicas do método CSMA/CD.
+Em ambientes sem fio pode ocorrer de um dispositivo não detectar a colisão, O CSMA/CA não detecta colisões
+ele tenta evitá-las esperando antes de transmitir, pois **cada dispositivo inclui o tempo necessário para transmitir**
+**a sua mensagem**, assim os outros dispositivos na rede sabem quanto tempo a rede ficará sendo ocupada.
+
+Após um dispositivo enviar o quadro, o receptor retornará uma confirmação para avisar o remetente da chegada
+do quadro.
+
+**Sistemas baseados em contenção não escalam bem sob uso intenso**
+
+Observação: LANs Ethernet que usam comutadores não usam um sistema baseado em contenção porque o comutador e a NIC
+do host operam no modo full-duplex.
