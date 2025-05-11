@@ -49,3 +49,62 @@ Um nó de transmissão **cria um resumo lógico dos conteúdos do quadro**, conh
 **redundância cíclica (cyclic redundancy check - CRC)** Este valor é colocado no campo FCS (Sequência de Verificação de 
 Quadro) para exibição ou conteúdo do quadro. No trailer Ethernet, o FCS fornece um método para o nó de recebimento 
 determinar se o quadro apresentou erros de transmissão.
+
+### Endereços da camada 2
+
+A camada de enlace provê o endereçamento do quadro. Estes endereços são chamados de endereços físicos.
+Esse endereço fica no cabeçalho do quadro, este específica o nó de destino do quadro. O cabeçalho pode ter 
+támbem o enderço de origem do quadro.
+Diferente dos endereços de camada 3 os endereços físicos **Não indicam em qual rede a máquina está**.
+Isso ocorre pois o endereço físico é único daquele dispositivo, ou seja é uma coisa encrustada na máquina.
+Os endereços da camada 2 são usados apenas para conectar  dispositivos dentro da mesma mídia, dentro da mesma
+rede IP.
+Conforme o pacote IP viaja do host para o roteador, de roteador para roteador e de roteador para host, em cada 
+ponto ao longo do caminho, _o pacote IP é encapsulado em um novo quadro de enlace de dados_. Cada quadro de link 
+de dados contém o endereço de link de dados de origem da NIC que está enviando o quadro e o endereço de link 
+de dados de destino da NIC que está recebendo o quadro.
+O endereço da camada de enlace **é usado apenas para entrega local**. Além da rede local esse endereços não
+tem significado algum.
+
+Caso precise passar os dados para outra parte da rede é necessário o uso de um _dispositivo intermediário_.
+Assim o roteador deve aceitar o quadro baseado no endereço físico, para desencapsula-lo para examinar seu 
+endereço IP. Usando endereço IP o roteador pode encontrar o dispositivo de destino e o melhor caminho para
+a entrega da mensagem. Após essa análise o roteador cria um novo quadro que é enviado para o próximo
+segmento de rede em direção ao destino final.
+
+### Quadros de LAN e WAN
+
+protocolos ethernet são usados por LANs com fio, comunicações sem fio se enquadram em WLAN(IEEE 802.11).
+Protocolos antigos das WANs:
+
+* Protocolo ponto a ponto (PPP);
+* Controle de Enlace de Dados de Alto Nível (HDLC);
+* Frame Relay;
+* Modo de Transferência Assíncrona (ATM);
+* X.25 
+Estes protocolos estão sendo substituídos pela Ethernet
+
+Cada protocolo usado na camada 2 desempenha o papel de controle de acesso ao meio. Isso significa que diversos
+dispositivos de rede diferentes podem agir como nós, operando na camada de enlace de dados ao implementar esses
+protocolos(**ou seja cada dispositivo pode usar um protocolo diferente**).
+O protocolo usado na camada 2 é determinado pela tecnologia usada na topologia que será implementada.
+A tecnologia usada é determinada pelo tamanho da rede, em termos do número de hosts e do escopo geográfico, e 
+dos serviços a serem fornecidos pela rede.
+
+LANs geralmente usam uma **tecnologia de alta largura de banda** para suportar diversos hosts. A pequena área 
+geografica ocupada por uma LAN(um prédio ou um campus) junto com sua grande densidade de usuários tornam essa
+tecnologia _econômica_.
+
+Usar tecnologias de banda larga para WANs não compensão pois acaba por ***não ser econômicamente viável***.
+Já que WANs abrangem grandes áreas geográficas(cidades e etc). Fazendo assim com que **o custo dos links**
+**físicos de longa distância** e a tecnologia usada para transportar os sinais resultam em menor largura de banda.
+
+A diferença de largura de banda geralmente implica no uso de diferentes protocolos.
+
+Os protocolos da camada de enlace de dados incluem:
+
+* Ethernet;
+* 802.11 sem fio;
+* Protocolo ponto a ponto (PPP);
+* Controle de Enlace de Dados de Alto Nível (HDLC);
+* Frame Relay.
