@@ -97,5 +97,8 @@ Convenções para nomes de váriaveis:
 'def', 'del', 'elif', 'else', 'except', 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is', 
 'lambda', 'nonlocal', 'not', 'or', 'pass', 'raise', 'return', 'try', 'while', 'with', 'yield'
 
-## Seção 6 - interação com o usuário
+# Módulo 3
 
+## Tomada de decisões do Python
+
+### Perguntas e repostas

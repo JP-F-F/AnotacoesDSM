@@ -14,7 +14,7 @@ function dados(){
 function cadastrar(){
 
     const banco = JSON.parse(localStorage.getItem("banco"))
-    
+
     let n = document.querySelector("#nmInput").value
     let l = document.querySelector("#loginInput").value
     let sn = document.querySelector("#senhaInput").value
