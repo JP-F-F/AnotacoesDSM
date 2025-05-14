@@ -131,3 +131,138 @@ configurado para espionagem multicast.
 Como os endereços multicast representam um grupo de endereços (às vezes chamado de grupo de hosts), eles só 
 podem ser utilizados como destino de um pacote. A origem sempre será um endereço unicast.
 
+## A tabela de endereços MAC
+
+### Noções básicas sobre switches
+
+O switch usa os endereços MAC para tomar decisões de encaminhamento. O switch não tem noçã quanto a
+endereços IP ou ARP e etc.
+**Observação: A tabela de endereços MAC às vezes é chamada de tabela de memória de conteúdo endereçável (CAM).**
+
+### Alternar aprendizado e Encaminhamento 
+
+O switch cria sua tabela de forma dinâmica, examinando os endereços MAC de origem dos quadros recebidos nas portas.
+O switch **encaminha os quadros procurando uma correspondência** entre o endereço MAC de destino no quadro e uma 
+entrada na tabela de endereços MAC.
+
+#### O aprendizado
+
+Todo quadro que entra em um switch é verificado quanto ao aprendizado de novas informações.
+Isso é feito examinando o endereço MAC de origem do quadro e o número da porta em que o quadro entrou no comutador. 
+Se o endereço MAC de origem não existe, é adicionado à tabela juntamente com o número da porta de entrada. Se o 
+endereço MAC de origem existir, o switch atualizará o cronômetro de atualização para essa entrada na tabela. Por 
+padrão, a maioria dos switches Ethernet mantém uma entrada na tabela por 5 minutos.
+
+**Nota: Se o endereço MAC de origem não existir na tabela, mas em uma porta diferente, o switch tratará isso como**
+**uma nova entrada. A entrada é substituída usando o mesmo endereço MAC, mas com o número de porta mais atual.**
+
+#### O encaminhamento 
+
+Se o endereço MAC de destino **for um endereço unicast**, o switch _procurará uma correspondência_ entre o endereço 
+MAC de destino do quadro e uma entrada em sua tabela de endereços MAC. Se o endereço MAC de destino **estiver** na 
+tabela, ele **encaminhará o quadro pela porta especificada**. Se o endereço MAC de destino **não estiver** na tabela, o 
+switch **encaminhará o quadro por todas as portas, exceto a de entrada. Isso é chamado de unicast desconhecido**
+
+### Filtragem de quadro
+
+Quando o swtich possui o endereço de destino em sua tabela ele filtra o envio do quadro para apenas a porta correta.
+
+### Tabelas de endereços MAC em switches conectados
+
+Um switch pode ter vários endereços MAC associados a uma única porta. 
+Isso é comum quando o switch está conectado a outro switch. 
+
+### Enviando um Quadro para um gateway padrão.
+
+Quando um dispositivo tem um endereço IP em uma rede remota, o quadro Ethernet não pode ser enviado diretamente 
+para o dispositivo de destino. Em vez disso, o quadro Ethernet é enviado ao endereço MAC do gateway padrão, o roteador.
+
+## Metodos de encaminhamento e velocidade dos swithces
+
+### Métodos de encaminhamento de quadros em swicthes DA CISCO
+
+Os switches usam um dos seguintes métodos de encaminhamento para o switching (comutação) de dados entre suas interfaces de rede:
+
+* **Switching store-and-forward** - Este método de encaminhamento de quadros recebe o quadro inteiro e calcula o 
+CRC. O CRC usa uma fórmula matemática, baseada no número de bits (valores 1) no quadro, para determinar se o 
+quadro recebido apresenta erro. Se o CRC é válido, o switch procura o endereço de destino, que determina a 
+interface de saída. Em seguida, o quadro é encaminhado para fora da porta correta.
+* **Switching cut-through** - Esse método de encaminhamento de quadros encaminha o quadro antes de ser 
+totalmente recebido. Pelo menos o endereço de destino do quadro deve ser lido para que o quadro possa ser encaminhado.
+
+Caso um quadro tenha erro na verificação CRC ele será descartado. Assim diminuindo o consumo de largura de
+banda por dados corrompidos.
+O switch **store-and-forward** é necessário para a análise de qualidade de serviço (QoS) em redes convergentes 
+onde a classificação de quadros para priorização de tráfego é necessária. Por exemplo, os fluxos de dados de voz 
+sobre IP (VoIP) precisam ter prioridade sobre o tráfego de navegação na web.
+
+
+### Switching Cut-Through
+
+No switching cut-through, o switch atua nos dados assim que eles são recebidos, mesmo que a transmissão não tenha sido concluída.
+O switch armazena em buffer apenas o quadro suficiente para ler o endereço MAC de destino, para que possa 
+determinar para qual porta deve encaminhar os dados.
+O endereço MAC de destino está localizado nos primeiros 6 bytes do quadro após o preâmbulo.
+
+Há duas formas de switching cut-trough:
+
+* **Comutação Fast-forward** - A comutação de avanço rápido oferece **o menor nível de latência**. e encaminha 
+imediatamente um pacote depois de ler o endereço de destino. Como o switching fast-forward começa o 
+encaminhamento antes de receber todo o pacote, **alguns pacotes podem ser retransmitidos com erros**. Isso ocorre 
+com _pouca frequência_ e a **NIC de destino descarta o pacote com defeito após o recebimento**. No modo fast-forward, 
+a latência é medida do primeiro bit recebido até o primeiro bit transmitido. Switching fast-forward é o método 
+cut-through típico de switching.
+
+* **Comutação Fragment-free** - Na alternância sem fragmentos, o switch **armazena os primeiros 64 bytes do quadro** 
+antes de encaminhar. Esse tipo de switching pode ser encarado como um compromisso entre o switching 
+store-and-forward e o switching fast-forward. O motivo de o switching fragment-free armazenar somente os 
+primeiros 64 bytes do quadro é **que a maioria dos erros e das colisões de rede ocorre durante os primeiros 64** 
+**bytes.** O switching fragment-free tenta melhorar o switching fast-forward executando uma pequena verificação de 
+erros nos primeiros 64 bytes do quadro para garantir que **não ocorra uma colisão antes de encaminhar o quadro.** O 
+switching fragment-free é um compromisso entre a alta latência e a alta integridade do switching 
+store-and-forward e a baixa latência e a integridade reduzida do switching fast-forward.
+
+Alguns switches são configurados para executar o switching cut-through por porta até que um limite de erro 
+definido pelo usuário seja atingido e, depois, mudam automaticamente para store-and-forward. Quando a taxa de 
+erros fica abaixo do limite, a porta retorna automaticamente para o switching cut-through.
+
+### Buffers de memória em switches
+
+Um switch Ethernet pode usar uma técnica de armazenamento de quadros em buffers antes de enviá-los. O buffer 
+também pode ser usado quando a porta de destino está ocupada devido ao congestionamento. O switch armazena o 
+quadro até que ele possa ser transmitido.
+
+Como mostrado na tabela, existem dois métodos de buffer de memória:
+
+![Métodos de buffer de memória](../imagens/metodosMemoriaBuffer.png)
+
+O buffer de memória compartilhada também resulta na capacidade de armazenar quadros maiores com potencialmente 
+menos quadros descartados. Isso é importante com a comutação assimétrica, que permite taxas de dados diferentes 
+em portas diferentes, como ao conectar um servidor a uma porta de switch de 10 Gbps e PCs a portas de 1 Gbps.
+
+### Configurações de interface - Velocidade e transmissão duplex
+
+Duas das configurações mais básicas em um switch são as configurações de largura de banda (às vezes denominadas 
+"velocidade") e duplex para cada porta do switch individual. 
+A ***negociação automática*** é uma função opcional encontrada na maioria dos switches Ethernet e das placas de 
+interface de rede (NICs). Ele permite que dois dispositivos **negociem automaticamente as melhores capacidades de** 
+**velocidade e duplex.** Full-duplex será escolhido se os dois dispositivos o tiverem para a largura de banda mais alta comum entre eles.
+
+**Observação: A maioria dos switches Cisco e NICs Ethernet é padronizada para negociação automática para** **velocidade e duplex. Portas Gigabit Ethernet só operam em full-duplex.**
+
+**A incompatibilidade duplex é uma das causas mais comuns de problemas de desempenho nos links Ethernet 10/100** 
+**Mbps. Ocorre quando uma porta no link opera em half-duplex, enquanto a outra porta opera em full-duplex.**
+
+A incompatibilidade duplex ocorre **quando uma ou ambas as portas em um link são redefinidas e o processo de** 
+**negociação automática não resulta nos dois parceiros de link com a mesma configuração.** Também pode ocorrer 
+quando os usuários reconfiguram um lado de um link e esquecem de reconfigurar o outro. Os dois lados de um link 
+devem estar ambos com a negociação automática ligada ou desligada. 
+**A prática recomendada é configurar ambas as portas de switch Ethernet como full-duplex.**
+
+### MDIX Automático
+
+A maioria dos dispositivos de switch agora suporta o recurso de (Auto-MDIX) interface dependente automática. 
+Quando ativado, o switch detecta automaticamente o tipo de cabo conectado à porta e configura as interfaces de acordo.
+Mas o ideal é que se use o tipo correto de cabo pois o MDIX pode ser desativado.
+
+![Tipos de Cabos para cada conexão](../imagens/tiposCabosConexoes.png)
