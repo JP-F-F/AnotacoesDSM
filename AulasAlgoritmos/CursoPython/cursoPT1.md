@@ -101,4 +101,22 @@ Convenções para nomes de váriaveis:
 
 ## Tomada de decisões do Python
 
-### Perguntas e repostas
+### loop for
+
+Na verdade, o for loop for foi projetado para realizar tarefas mais complicadas - ele pode "navegar" em 
+grandes coleções de itens de dados por item.
+
+EX:
+ for i in range(100):
+    # do_something()
+    pass 
+
+A invocação da função range() pode ser equipada com dois argumentos, não apenas um:
+Nesse caso, o primeiro argumento determina o (primeiro) valor inicial da variável de controle.
+O último argumento mostra o primeiro valor em que a variável de controle não será atribuída.
+Podemos acrescentar um terceiro argumento que irá dizer ao loop for o valor a se incrementar na váriavel contadora
+
+### Instruções break e continue
+
+* ***break*** - sai do loop imediatamente e termina incondicionalmente a operação do loop; o programa começa a executar a instrução mais próxima após o corpo do loop;
+* ***continue*** - se comporta como se o programa tivesse chegado ao fim do corpo; o próximo turno é iniciado e a expressão de condição é testada imediatamente.
