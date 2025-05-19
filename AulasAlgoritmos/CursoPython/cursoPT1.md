@@ -120,3 +120,32 @@ Podemos acrescentar um terceiro argumento que irá dizer ao loop for o valor a s
 
 * ***break*** - sai do loop imediatamente e termina incondicionalmente a operação do loop; o programa começa a executar a instrução mais próxima após o corpo do loop;
 * ***continue*** - se comporta como se o programa tivesse chegado ao fim do corpo; o próximo turno é iniciado e a expressão de condição é testada imediatamente.
+
+### Operadores Bit a Bit
+
+No entanto, existem quatro operadores que permitem manipular bits únicos de dados. 
+Aqui estão todos eles:
+
+* & (e comercial) - conjunção bit a bit;
+* | (barra) - disjunção bit a bit;
+* ~ (til) - negação bit a bit;
+* ^ (circunflexo) ‒ bit a bit exclusivo ou (xor).
+
+**Vamos facilitar:**
+
+* & requer exatamente dois 1 s para fornecer 1 como resultado;
+* | requer pelo menos um 1 para fornecer 1 como resultado;
+* ^ requer exatamente um 1 para fornecer 1 como resultado.
+
+Vamos acrescentar uma observação importante: os argumentos desses operadores ***devem ser números inteiros***;
+
+### Deslocamento de binário
+
+Vamos acrescentar uma observação importante: os argumentos desses operadores devem ser números inteiros.
+
+Deslocar um valor um bit para a esquerda corresponde à multiplicação por dois; respectivamente, mudar um bit para 
+a direita é como dividir por dois (observe que o bit mais à direita está perdido).
+Os operadores de deslocamento em Python são um par de dígrafos: << e >>, sugerindo claramente em qual direção o deslocamento vai agir.
+EX: **Valor >> bits**
+
+O argumento à esquerda desses operadores é um valor inteiro cujos bits são deslocados. O argumento a direita determina o tamanho do turno.
