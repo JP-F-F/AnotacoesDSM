@@ -120,3 +120,81 @@ Podemos acrescentar um terceiro argumento que irá dizer ao loop for o valor a s
 
 * ***break*** - sai do loop imediatamente e termina incondicionalmente a operação do loop; o programa começa a executar a instrução mais próxima após o corpo do loop;
 * ***continue*** - se comporta como se o programa tivesse chegado ao fim do corpo; o próximo turno é iniciado e a expressão de condição é testada imediatamente.
+
+### Remover elementos das Listas
+
+Qualquer um dos elementos da lista pode ser removido a qualquer momento - isso é feito com uma instrução chamada **DEL** (delete). ***Nota: é uma instrução, não uma função.***
+**EX: del numbers[1]** essa instrução irá deletar o valor na segunda posição da lista
+
+### Os indices negativos são legais
+
+Um elemento com um índice igual a -1 é o último na lista.
+Meio que ao invés da gente contar em ordem crescente a gente vai contar na ordem decrescente.
+
+### Funções e Métodos 
+
+Um método é um tipo específico de função - ele se comporta como uma função e se parece com uma função, mas 
+difere na maneira em que atua e em seu estilo de invocação.
+
+Um método faz tudo isso, mas também é **capaz de alterar o estado de uma entidade selecionada**.
+Um método p**ertence aos dados para os quais trabalha**, enquanto uma f**unção pertence ao código inteiro.**
+
+### Adicionando elementos em uma lista: append() e insert()
+
+O método **append()** cola o valor colocado entre chaves no final da lista indicada.
+**EX:list.append(value)**
+
+Já com o método insert, nós podemos escolher em que posição queremos adicionar o item na lista indicada.
+**EX:list.insert(index, value)**
+
+## Ordenando listas simples: O algortimo de classificação bubblesort
+
+### A ordenação de bolhas
+
+O Bubblesort é um algoritmo muito simples, fácil de entender, mas infelizmente não muito eficiente. É usado 
+muito raramente, e certamente não para listas grandes e extensas.
+
+### Ordenando uma lista
+
+Uma diga para oredenar listas é usar o método **sort()**
+
+## Operações em listas
+
+### Poderes do fatiamento
+
+Uma ***fatia*** é um elemento da sintaxe do Python que permite **fazer uma cópia totalmente nova de uma lista ou de partes de uma lista.**
+Ele é usado da seguinte maneira, por exemplo:
+list1 = [start:end]
+
+podemos simplificar a escrita do fatiamento escrevendo apenas **list1 = [:3]** isso fará com que 
+automaticamente se incluam os itens da lista apartir do elemento [0], o mesmo funciona com o _end_ mas com a
+lógica invers a do start.
+
+nós podemos usar esse elemento junto de outros metodos de listas, como o del por exemplo, assim podendo apagar
+vários elementos de uma lista de uma vez.
+**EX: del list1[1:3]**
+
+### Fatias - indíces nagativos
+
+Se usarmos números negativos o fatiamento usará da lógica contraria dos números positivos, ou seja ao invés
+de desconsiderar o ultimo valor (end-1) ele irá adicionar um valor a mais na inclusão (end+1)
+
+### Operadores in e not in
+
+O primeiro deles (in) verifica se um determinado elemento (seu argumento à esquerda) está atualmente 
+armazenado em algum lugar dentro da lista (o argumento à direita) - o operador retorna True neste caso.
+
+O segundo (not in) verifica se um determinado elemento (seu argumento à esquerda) está ausente em uma lista - 
+o operador retorna True neste caso.
+
+## Listas em Aplicações avançadas
+
+### Listas em Listas
+
+O mesmo efeito pode ser alcançado por meio de uma compreensão de lista, a sintaxe especial usada pelo Python para preencher listas enormes.
+
+Uma compreensão de lista é, na verdade, uma lista, mas criada em andamento durante a execução do programa e não é descrita estaticamente.
+**EX: row = [white_pawn for i in range(8)]
+
+### Matrizes Bidimensionais
+
