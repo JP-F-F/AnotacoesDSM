@@ -147,3 +147,112 @@ for english, french in dictionary.items():
 # Nesse caso as chaves do dicionário estão sendo armazenadas na váriavel english
 # E os valores da tradução em francês na váriavel french
 ````
+
+#### Modificação e adição de valores 
+
+Atribuir um novo valor a uma chave atual é simples - como os dicionários são totalmente mutáveis, não há 
+obstáculos para modificá-los.
+Nesse exemplo estamos trocando a palavra **chat** por **minou**.
+Como podemos ver, a adição e modificação de valores em dicionários também funciona de forma semelhante aos
+meios usados em listas
+
+````
+dictionary = {"gato": "chat", "cachorro": "chien", "cavalo": "cheval"}
+ 
+dictionary['gato'] = 'minou'
+print(dictionary)
+````
+
+#### Adição de uma nova chave
+
+Adicionar um novo par de valores-chave a um dicionário é tão simples quanto alterar um valor - você só precisa 
+atribuir um valor a uma nova chave anteriormente inexistente.
+No exemplo a seguir estamos adicionando a chave **swan** e o valor **cygne**
+**EXEMPLO**:
+
+````
+ dictionary = {"gato": "chat", "cachorro": "chien", "cavalo": "cheval"}
+ 
+dictionary['swan'] = 'cygne'
+print(dictionary) 
+````
+
+É possível adicionar um valor ao dicionário usando o método update()
+Nesse exemplo estamos adicionando a chave **pato** e o valor **canard**
+**EXEMPLO**:
+
+````
+ dictionary = {"gato": "chat", "cachorro": "chien", "cavalo": "cheval"}
+ 
+dictionary.update({"pato": "canard"})
+print(dictionary) 
+````
+
+#### Removendo uma chave
+
+Primeiro um aviso, sempre que removemos uma chave, **seu valor é removido junto(obviamente)**
+Para removermos uma chave usamos a instrução **del**
+**EXEMPLO**:
+
+````
+dictionary = {"gato": "chat", "cachorro": "chien", "cavalo": "cheval"}
+ 
+del dictionary['cachorro']
+print(dictionary)
+````
+
+Caso queiramos remover específicamente a última chave de um dicionário podemos usar o método **popitem()**
+***AVISO: nas versões do python que são anteriores a versão 3.6.7, esse método remove um item aleatório do dicionário.
+
+## Exceções
+
+### O ramo da tentativa exceto
+
+No python o equivalente do **try...catch..** é o **try...except...**;
+Ao lado do **except** nós colocamos o tipo de errado que essa exceção deve pegar.
+E assim podemos ir adicionando exceções para erros diferentes.
+Lembre-se, não tente tratar a mesma exceção mais de uma vez.
+
+**EXEMPLO:**
+````
+try:
+ value = int(input('Digite um número natural: '))
+ print('O recíproco de', value, 'é', 1/value) 
+except ValueError:
+ print('Eu não sei o que fazer.') 
+except ZeroDivisionError:
+ print('A divisão por zero não é permitida em nosso Universo.') 
+````
+
+Caso queiramos adicionar uma resposta padrão para erros, no caso, uma exceção que lide com erros que não
+foram específicados em outros **excepts**, basta apenas que escravamos **except** sem especificar o erro.
+***LEMBRE-SE O EXCEPT PADRÃO DEVE SEMPRE SER O ÚLTIMO A SER DECLARADO***
+Podemos fazer uma **except** lidar com vários erros de uma vez, separando cada erro com virgula:
+**except SyntaxError, ValueError**
+
+**EXEMPLO:**
+````
+try:
+: value = int (input('Insira um número natural:')) 
+print('O recíproco de', value, 'é', 1 / value) 
+
+# Exceção para erros de valores
+except ValueError:
+ print('Não sei o que fazer.' ) 
+
+# Exceção para erros de divisão por zero
+except ZeroDivisionError:
+ print('Divisão por zero não é permitida em nosso universo.') 
+
+# Exceção para erros gerais
+except: 
+print('algo de estranho aconteceu aqui ... Desculpe! ')
+````
+
+## Algumas Exceções úteis
+
+* ZeroDivisionError
+* ValueError
+* TypeError
+* AttributeError
+* SyntaxError
