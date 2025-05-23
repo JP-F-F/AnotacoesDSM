@@ -152,3 +152,19 @@ salto são inseridos na tabela de roteamento IP.
 
 ### Introdução a um tabela de roteamento IPv4
 
+O comando de modo EXEC show ip route privilegiado é usado para exibir a tabela de roteamento IPv4 em um roteador Cisco IOS.
+No início de cada entrada de tabela de roteamento é um código que é usado para identificar o tipo de rota ou 
+como a rota foi aprendida. As fontes comuns de rotas (códigos) incluem:
+
+* L - Endereço IP da interface local diretamente conectado
+* C - Rede diretamente conectada
+* S - A rota estática foi configurada manualmente por um administrador
+* O - OSPF
+* D - EIGRP
+
+Uma rota diretamente conectada é criada automaticamente quando uma interface do roteador é configurada com 
+informações de endereço IP e é ativada
+O roteador adiciona duas entradas de rota com os códigos C (ou seja, a rede conectada) e L (ou seja, o 
+endereço IP da interface local da rede conectada). 
+As entradas de rota também identificam a interface de saída a ser usada para alcançar a rede. 
+
