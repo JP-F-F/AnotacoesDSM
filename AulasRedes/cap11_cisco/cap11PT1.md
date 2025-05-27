@@ -116,4 +116,146 @@ Além do endereço de transmissão 255.255.255.255, há um endereço IPv4 de tra
 Chamado de transmissão direcionada, este endereço usa o endereço mais alto na rede, que é 
 o endereço onde todos os bits de host são 1s.
 Para enviar dados para todos os hosts em uma rede, um host pode enviar um único pacote 
-endereçado ao endereço de difusão da rede
+endereçado ao endereço de difusão da rede.
+Quando um pacote de difusão direcionada atinge um roteador conectado diretamente à rede de destino, esse 
+pacote é transmitido na rede de destino.
+
+### Multicast
+
+Um pacote multicast é um pacote com um endereço IP de destino que é um endereço multicast. 
+O IPv4 reservou os endereços 224.0.0.0 a 239.255.255.255 como intervalo de multicast.
+
+Os hosts que recebem pacotes multicast específicos são chamados de clientes multicast. 
+Os clientes multicast usam serviços solicitados por um programa cliente para se inscrever no grupo multicast.
+
+**Cada grupo multicast é representado por um único endereço IPv4 multicast de destino.**
+
+Quando um host IPv4 se inscreve em um grupo multicast, o host processa pacotes endereçados tanto a esse 
+endereço multicast como a seu endereço unicast alocado exclusivamente.
+
+Protocolos de roteamento, como OSPF, usam transmissões multicast. 
+
+Por exemplo, os roteadores habilitados com OSPF se comunicam entre si usando o endereço multicast OSPF reservado 224.0.0.5. 
+Somente dispositivos habilitados com OSPF processarão esses pacotes com 224.0.0.5 como endereço IPv4 de destino. 
+Todos os outros dispositivos ignorarão esses pacotes.
+
+## Tipos de endereço IPv4
+
+### Endereços IPv4 públicos e Privados
+
+Alguns endereços IPv4 não podem ser usados para sair para a Internet, e outros são especificamente alocados 
+para roteamento para a Internet. 
+Alguns são usados para verificar uma conexão e outros são auto-atribuídos.
+
+Endereços IPv4 públicos são endereços roteados globalmente entre os roteadores do provedor de serviços de 
+Internet (ISP).
+**No entanto, nem todos os endereços IPv4 disponíveis podem ser usados na Internet**
+Existem blocos de endereços (conhecidos como endereços privados) que são usados pela maioria das organizações 
+para atribuir endereços IPv4 a hosts internos.
+**Os endereços IPv4 privados não são exclusivos e podem ser usados internamente em qualquer rede.**
+
+![Tabela de endereços IPv4 privados](../imagens/tblIPv4Privados.png)
+
+**Observação: Endereços privados são definidos no RFC 1918 e às vezes referido como espaço de endereço RFC 1918.**
+
+### Roteamento para internet
+
+A maioria das redes internas, de grandes empresas a redes domésticas, usa endereços IPv4 privados para 
+endereçar todos os dispositivos internos (intranet), incluindo hosts e roteadores.
+
+Os pacotes com um endereço privado devem ser filtrados (descartados) ou traduzidos para um endereço público antes de encaminhar o pacote para um ISP.
+O ISP converte um endereço privado para público usando a Conversão de Endereços de Rede (NAT).
+O NAT é usado para converter entre endereços IPv4 privados e IPv4 públicos. 
+**Isso geralmente é feito no roteador que conecta a rede interna à rede ISP.**
+
+Embora endereços IPv4 são sejam vísiveis por redes exteriores(como a internet), esse tipo de endereço e nem a
+NAT são considerados medidas de segurança eficazes.
+
+As organizações que têm recursos disponíveis para a Internet, como um servidor Web, também terão dispositivos 
+com endereços IPv4 públicos. 
+Esta parte da rede é conhecida como a DMZ (zona desmilitarizada)
+
+### Endereços IPv4 de uso especial
+
+#### Endereços de loopback
+
+Os endereços de loopback (127.0.0.0 / 8 ou 127.0.0.1 a 127.255.255.254) são mais comumente identificados como apenas 127.0.0.1. 
+***Esses são endereços especiais usados por um host para direcionar o tráfego para si próprio.***
+Por exemplo, ele pode ser usado em um host para testar se a configuração TCP / IP está operacional.
+
+#### Endereços Link Local
+
+Os endereços locais de link (169.254.0.0 / 16 ou 169.254.0.1 a 169.254.255.254) são mais conhecidos como 
+endereços de endereçamento IP privado automático (APIPA) ou endereços auto-atribuídos. 
+Eles são usados por um cliente DHCP do Windows para auto-configurar no caso de não existirem servidores DHCP disponíveis.
+***Endereços de link local podem ser usados em uma conexão ponto a ponto, mas não são comumente usados para esse fim.***
+
+### Endereçamento classfull legado
+
+Em 1981 os endereços IPv4 começaram a ser atríbuidos usando classes (o endereço classful), sendo esses definidos
+em três classes A, B ou C. A RFC dividiu os intervalos de unicast em classes específicas da seguinte maneira:
+
+* Classe A (0.0.0.0/8 to 127.0.0.0/8) - Projetado para suportar redes extremamente grandes com mais de 16 milhões de endereços de host. 
+A Classe A usou um prefixo fixo /8 com o primeiro octeto para indicar o endereço de rede e os três octetos 
+restantes para endereços de host (mais de 16 milhões de endereços de host por rede).
+
+* Classe B (128.0.0.0 /16 - 191.255.0.0 /16) - Projetado para suportar as necessidades de redes de tamanho moderado a grande, com até aproximadamente 65.000 endereços de host.
+A Classe B usou um prefixo fixo /16 com os dois octetos de alta ordem para indicar o endereço de rede e os 
+dois octetos restantes para endereços de host (mais de 65.000 endereços de host por rede).
+
+* Classe C (192.0.0.0 /24 - 223.255.255.0 /24) - Projetado para suportar redes pequenas com um máximo de 254 hosts. 
+A Classe C usou um prefixo fixo / 24 com os três primeiros octetos para indicar a rede e o octeto restante 
+para os endereços de host (apenas 254 endereços de host por rede).
+
+**Observação: Há também um bloco multicast de Classe D que consiste em 224.0.0.0 a 239.0.0.0 e um bloco de**
+**endereço experimental de Classe E que consiste em 240.0.0.0 - 255.0.0.0.**
+
+Em meados da década de 1990, com a introdução da World Wide Web (WWW), o endereçamento clássico foi obsoleto 
+para alocar de forma mais eficiente o espaço de endereços IPv4 limitado. 
+A alocação de endereço de classe foi substituída por endereçamento sem classe, que é usado hoje.
+
+**O endereçamento sem classe ignora as regras das classes (A, B, C).**
+Endereços de rede IPv4 públicos (endereços de rede e máscaras de sub-rede) são alocados com base no número de 
+endereços que podem ser justificados.
+
+## Segmentação de Rede
+
+### Domínios de transmissão e segmentação
+
+Os dispositivos em LANs Ethernet também localizam outros dispositivos usando serviços. 
+Um host normalmente adquire sua configuração de endereço IPv4 usando o protocolo DHCP (Dynamic Host 
+Configuration Protocol) que envia difusões na rede local para localizar um servidor DHCP.
+**Os switches propagam broadcasts por todas as interfaces, exceto a interface em que foram recebidos.**
+
+**Roteadores não propagam broadcasts.**
+Quando um roteador recebe um broadcast, ele não o encaminha por outras interfaces.
+Portanto, cada interface do roteador se conecta a um domínio de broadcast e as transmissões são propagadas 
+apenas dentro desse domínio de broadcast específico.
+
+### Problemas com grandes domínios de BroadCast
+
+**Um grande domínio de broadcast é uma rede que conecta vários hosts.**
+
+Um problema desse tipo de domínio é que os hosts podem gerar broadcasts em excesso e afetar a rede de forma negativa.  
+Isso resulta em operações de rede lentas devido à quantidade significativa de tráfego que pode causar e 
+operações de dispositivo lentas porque um dispositivo deve aceitar e processar cada pacote de difusão.
+A solução é reduzir o tamanho da rede para criar domínios de broadcast menores em um processo denominado divisão em sub-redes. 
+**Os espaços de rede menores são chamados de sub-redes.**
+Os broadcasts são propagados apenas dentro dos domínios de broadcast menores. 
+Portanto, um broadcast em LAN 1 não se propagaria para LAN 2.
+
+**Esta é a base da divisão em sub-redes: usar bits de host para criar sub-redes adicionais.**
+***Observação:*** Os termos sub-rede e rede costumam ser usados de maneira intercambiável. A maioria das redes são uma sub-rede de um bloco de endereços maior.
+
+#### Razões para segmentar redes
+
+Além de melhorar o desempenho, permite que o administrador implemente políticas de segurança como, por 
+exemplo, quais sub-redes podem ou não se comunicar com quais sub-redes.
+Outra razão é que reduz o número de dispositivos afetados pelo tráfego anormal de transmissão devido a 
+configurações incorretas, problemas de hardware/software ou intenção mal-intencionada.
+
+Algumas maneiras comuns de separar as redes são
+* Por localização
+* Por Grupo ou Função
+* Tipo de dispositivo
+
